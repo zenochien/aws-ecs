@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.99.1" />
+    <meta name="description" content="">
+<meta name="author" content="journeyoftheaverageguy@gmail.com">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Create RDS database instance :: GET STARTED WITH AMAZON RDS.</title>
+
+    
+    <link href="/css/nucleus.css?1704857834" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1704857834" rel="stylesheet">
+    <link href="/css/hybrid.css?1704857834" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1704857834" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1704857834" rel="stylesheet">
+    <link href="/css/auto-complete.css?1704857834" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1704857834" rel="stylesheet">
+    <link href="/css/theme.css?1704857834" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1704857834" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1704857834" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1704857834"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/4-create-rds/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1704857834"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1704857834"></script>
+<script type="text/javascript">
+    
+        var baseurl = "";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1704857834"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-introduce/" title="Introduction" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-introduce/">
+           <b> 1. </b> Introduction
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/" title="Preparation steps" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-prerequiste/">
+           <b> 2. </b> Preparation steps
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/1-create-vpc/" title="Create a VPC" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-prerequiste/1-create-vpc/">
+           <b> 2.1 </b> Create a VPC
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/2-create-ec2-sg/" title="Create EC2 Security Group" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-prerequiste/2-create-ec2-sg/">
+           <b> 2.2 </b> Create EC2 Security Group
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/3-create-db-sg/" title="Create RDS Security group" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-prerequiste/3-create-db-sg/">
+           <b> 2.3 </b> Create RDS Security group
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/4-create-db-subnetgroup/" title="Create DB Subnet Group" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-prerequiste/4-create-db-subnetgroup/">
+           <b> 2.4 </b> Create DB Subnet Group
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/3-create-ec2/" title="Create EC2 instance" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/3-create-ec2/">
+           <b> 3. </b> Create EC2 instance
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/4-create-rds/" title="Create RDS database instance" class="dd-item 
+        parent
+        active
+        
+        ">
+      <a href="/4-create-rds/">
+           <b> 4. </b> Create RDS database instance
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-deploy-app/" title="Application Deployment" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-deploy-app/">
+           <b> 5. </b> Application Deployment
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/6-backup/" title="Backup and restore" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/6-backup/">
+           <b> 6. </b> Backup and restore
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/7-cleanup/" title="Clean up resources" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/7-cleanup/">
+           <b> 7. </b> Clean up resources
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://aws.amazon.com/blogs"><i class='fab fa-aws'></i> AWS Study Group - Blog</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj"><i class='fab fa-facebook'></i> AWS Study Group - FB Group</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="/4-create-rds/" selected>English</option>
+                    
+                  
+              
+                  
+              
+          
+              
+              
+                  
+              
+                  
+                    
+                    
+                      <option id="vi" value="/vi/4-create-rds/">Tiếng Việt</option>
+                    
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    
+     <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7831196&style=0038&nbdigits=9&type=page&initCount=0" title="Migrate" Alt="web counter"   border="0" /></a>  <br>
+     <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" Alt="web counter"   border="0"   />
+     
+</left>
+<left>
+    <br>
+    <br>
+        <b> Last Updated </b> <br>
+        <i><font color=orange>10-01-2023</font></i>
+    </left>
+    <left>
+        <br>
+        <br>
+            <b> Team </b> <br>
+           
+            <i>  <br>
+                <a href="https://www.linkedin.com/in/jotaguy"  style="color:orange">Gia Hưng </a> <br>
+        </i>
+        </left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            <a href='/'>Get Started with Amazon RDS</a> > Create RDS database instance
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Create RDS database instance
+            </h1>
+          
+
+        
+
+
+
+	<h4 id="install-git-on-amazon-ec2-2023">Install Git on Amazon EC2 2023</h4>
+<p>Below are instructions for installing Git on an Amazon EC2 virtual machine running Amazon Linux 2023 using basic steps.</p>
+<ol>
+<li>Update System Packages</li>
+</ol>
+<p>First, update your system packages to make sure you&rsquo;re using the latest version:</p>
+<pre tabindex="0"><code>sudo dnf update -y
+</code></pre><ol start="2">
+<li>Find Git Packages. Use the following command to find Git packages in the repository:</li>
+</ol>
+<pre tabindex="0"><code>sudo dnf search git
+</code></pre><ol start="3">
+<li>Install Git. Once you find the Git package, you can install it with the following command:</li>
+</ol>
+<pre tabindex="0"><code>sudo dnf install git -y
+</code></pre><ol start="4">
+<li>Verify Git Settings. Finally, check the Git version was successfully installed:</li>
+</ol>
+<pre tabindex="0"><code>git --version
+</code></pre><p>If you see the Git version appear, it means the installation is complete.</p>
+<p><img src="/images/4/0001.png?featherlight=false&amp;width=90pc" alt="Create a VPC"></p>
+<ol start="5">
+<li>Install Node.js on Amazon EC2 Linux 2023</li>
+</ol>
+<ul>
+<li>Below is a Bash script to install Node.js on Amazon EC2 Linux:</li>
+</ul>
+<pre tabindex="0"><code>#!/bin/bash
+
+# Color for formatting
+GREEN=&#39;\033[0;32m&#39;
+NC=&#39;\033[0m&#39; # Colorless
+
+# Check if NVM is installed
+if ! command -v nvm &amp;&gt; /dev/null; then
+  # Step 1: Install nvm
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+  source ~/.nvm/nvm.sh
+fi
+
+# Verify nvm installation
+nvm --version
+
+# Install the LTS version of Node.js
+nvm install --lts
+
+# Use the installed LTS version
+nvm use --lts
+
+# Verify Node.js and npm installation
+node -v
+npm -v
+
+# Step 4: Create package.json file (if it doesn&#39;t exist yet)
+if [ ! -f package.json ]; then
+  npm init -y
+  echo -e **${GREEN}Created file package.json.${NC}**
+fi
+
+#Step 5: Install necessary npm packages
+echo -e **Installing required npm packages...**
+npm install express dotenv express-handlebars body-parser mysql
+
+#Step 6: Install nodemon as a development dependency
+echo -e **Installing nodemon as a development dependency...**
+npm install --save-dev nodemon
+npm install -g nodemon
+
+# Step 7: Add npm start script to package.json
+if ! grep -q &#39;**start**:&#39; package.json; then
+  npm set-script start **index.js** # Replace **your-app.js** with your entry point file
+  echo -e **${GREEN}Added npm start script to package.json.${NC}**
+fi
+
+echo -e **${GREEN}Installation completed. You can now start building and running your Node.js application using &#39;npm start&#39;.${NC}**
+</code></pre><p><img src="/images/4/0002.png?featherlight=false&amp;width=90pc" alt="Create a VPC"></p>
+<p><img src="/images/4/0003.png?featherlight=false&amp;width=90pc" alt="Create a VPC"></p>
+<h4 id="creating-a-db-instance-on-aws">Creating a DB Instance on AWS</h4>
+<p>To create a DB Instance on AWS, you can use the AWS Management Console with the option of Easy create either enabled or disabled. When Easy create is enabled, you only need to specify the DB engine type, DB Instance size, and DB Instance identifier. Easy create uses default settings for other configuration options. When Easy create is disabled, you need to specify more configuration options when creating a database, including options for availability, security, backups, and maintenance.</p>
+<p><strong>Note:</strong> In the procedure below, the Standard create option is enabled, and Easy create is not. This procedure uses MySQL as an example.</p>
+<p>For an example using Easy create to guide you in creating and connecting sample DB Instances for each engine, see <strong>Getting Started with Amazon RDS.</strong></p>
+<p><strong>To create a DB Instance:</strong></p>
+<ol>
+<li>
+<p>Sign in to the AWS Management Console and open the Amazon RDS console at <a href="https://console.aws.amazon.com/rds/">https://console.aws.amazon.com/rds/</a>.</p>
+</li>
+<li>
+<p>In the upper right corner of the Amazon RDS console, select the AWS region where you want to create the DB Instance.</p>
+</li>
+<li>
+<p>In the navigation pane, choose <strong>Databases.</strong></p>
+</li>
+<li>
+<p>Choose <strong>Create database</strong>, and then select <strong>Standard create.</strong></p>
+</li>
+</ol>
+<p><img src="/images/4/0004.png?featherlight=false&amp;width=90pc" alt="Create a VPC"></p>
+<p><img src="/images/4/0005.png?featherlight=false&amp;width=90pc" alt="Create a VPC"></p>
+<ol start="5">
+<li>
+<p>For <strong>Engine type</strong>, choose MariaDB, Microsoft SQL Server, MySQL, Oracle, or PostgreSQL. In this example, we are using Microsoft SQL Server.</p>
+</li>
+<li>
+<p>For <strong>Database management type</strong>, if you are using Oracle or SQL Server, select <strong>Amazon RDS</strong> or <strong>Amazon RDS Custom.</strong></p>
+</li>
+<li>
+<p>For <strong>Edition</strong>, if you are using Oracle or SQL Server, select the version of the DB engine you want to use.</p>
+</li>
+<li>
+<p>For <strong>Version</strong>, select the engine version.</p>
+</li>
+<li>
+<p>In the <strong>Templates</strong> section, choose a template that matches your use case. If you choose <strong>Production</strong>, the following options will be pre-selected in the next step:</p>
+<ul>
+<li>Multi-AZ failover option</li>
+<li>Provisioned IOPS SSD (io1) storage option</li>
+<li>Protection against deletion option</li>
+</ul>
+<p>We recommend using these features for a production environment.</p>
+</li>
+</ol>
+<p><strong>Note:</strong> Template choices may vary by version.</p>
+<ol start="10">
+<li>
+<p>To enter your master password, follow these steps:</p>
+<ul>
+<li>In the <strong>Settings</strong> section, open <strong>Credential Settings.</strong></li>
+<li>If you want to specify a password, uncheck the <strong>Auto generate a password</strong> box if it&rsquo;s already selected.</li>
+<li>(Optional) Change the <strong>Master username</strong> value.</li>
+<li>Enter the same password in both <strong>Master password</strong> and <strong>Confirm password.</strong></li>
+<li>(Optional) Set up a connection to a compute resource for this DB Instance.</li>
+</ul>
+</li>
+</ol>
+<p><img src="/images/4/0006.png?featherlight=false&amp;width=90pc" alt="Create a VPC"></p>
+<p><img src="/images/4/0007.png?featherlight=false&amp;width=90pc" alt="Create a VPC"></p>
+<p><img src="/images/4/0008.png?featherlight=false&amp;width=90pc" alt="Create a VPC"></p>
+<ol start="11">
+<li>
+<p>You can configure the connection between an Amazon EC2 instance and the new DB Instance during the DB Instance creation process. For more information, see <strong>Configuring Automatic Network Connectivity to an EC2 Instance.</strong></p>
+</li>
+<li>
+<p>In the <strong>Connectivity</strong> section under <strong>VPC security group (firewall)</strong>, if you choose <strong>Create new</strong>, a VPC security group with a login rule allowing your local computer&rsquo;s IP address to access the database will be created.</p>
+</li>
+</ol>
+<p><img src="/images/4/0009.png?featherlight=false&amp;width=90pc" alt="Create a VPC"></p>
+<p><img src="/images/4/00010.png?featherlight=false&amp;width=90pc" alt="Create a VPC"></p>
+<p><img src="/images/4/00011.png?featherlight=false&amp;width=90pc" alt="Create a VPC"></p>
+<ol start="13">
+<li>
+<p>For the remaining sections, specify your DB Instance settings. For more information on each setting, see <strong>Settings for DB Instances.</strong></p>
+</li>
+<li>
+<p>Choose <strong>Create database.</strong></p>
+</li>
+</ol>
+<p><img src="/images/4/00012.png?featherlight=false&amp;width=90pc" alt="Create a VPC"></p>
+<p><img src="/images/4/00013.png?featherlight=false&amp;width=90pc" alt="Create a VPC"></p>
+<ol start="15">
+<li>
+<p>If you choose to use an automatically generated password, the <strong>View credential details</strong> button will appear on the <strong>Databases</strong> page.</p>
+</li>
+<li>
+<p>To view the master username and password for the DB Instance, select <strong>View credential details.</strong></p>
+</li>
+<li>
+<p>To connect to the DB Instance using the master username, use the displayed username and password.</p>
+</li>
+</ol>
+<p><strong>Important:</strong> You cannot review the master user password. If you don&rsquo;t record it, you may need to change it. If you need to change the master user password after the DB Instance is available, you can modify the DB Instance to do this. For more information on modifying a DB Instance, see <strong>Modifying an Amazon RDS DB Instance.</strong></p>
+<ol start="18">
+<li>Under <strong>Databases</strong>, select the name of the new DB Instance.</li>
+</ol>
+<p><img src="/images/4/00014.png?featherlight=false&amp;width=90pc" alt="Create a VPC"></p>
+<p><img src="/images/4/00015.png?featherlight=false&amp;width=90pc" alt="Create a VPC"></p>
+<ol start="19">
+<li>On the RDS console, information about the new DB Instance will appear. The DB Instance will have a <strong>Creating</strong> status until it is created and ready for use. Once the status changes to <strong>Available</strong>, you can connect to the DB Instance. Depending on the DB Instance class and allocated storage, it may take a few minutes for the new DB Instance to be available.</li>
+</ol>
+<p><img src="/images/4/00016.png?featherlight=false&amp;width=90pc" alt="Create a VPC"></p>
+<ol start="20">
+<li>Check RDS</li>
+</ol>
+<ul>
+<li>In the details page of the RDS instance, you can find connection-related information such as <strong>Endpoint</strong>, <strong>Port</strong>, and <strong>Username</strong>.</li>
+<li>The Endpoint is the URL or IP address you use to connect to the RDS database.</li>
+</ul>
+<p><img src="/images/4/00017.png?featherlight=false&amp;width=90pc" alt="Create a VPC"></p>
+<p><img src="/images/4/00018.png?featherlight=false&amp;width=90pc" alt="Create a VPC"></p>
+<h4 id="viewing-logs-and-events-on-aws-rds">Viewing Logs and Events on AWS RDS</h4>
+<p>To monitor Logs and Events on Amazon RDS (Relational Database Service), you can follow these steps:</p>
+<ol>
+<li>
+<p>Sign in to the <a href="https://aws.amazon.com/console/">AWS Management Console</a>.</p>
+</li>
+<li>
+<p>Choose the <strong>Amazon RDS</strong> service from the AWS dashboard.</p>
+</li>
+<li>
+<p>Select the RDS instance you want to view Logs and Events for.</p>
+</li>
+<li>
+<p>In the instance details page, you will see the following tabs:</p>
+<ul>
+<li><strong>DB instance details</strong>: Displays basic information about the instance.</li>
+<li><strong>Configuration</strong>: Allows you to view and modify the instance&rsquo;s configuration.</li>
+<li><strong>Log &amp; events</strong>: This is where you can view Logs and Events.</li>
+</ul>
+</li>
+<li>
+<p>Click on the <strong>Log &amp; events</strong> tab. Here, you can view various logs such as:</p>
+<ul>
+<li><strong>Error log</strong>: Records errors that occur on the instance.</li>
+<li><strong>General log</strong>: Records general activities on the instance.</li>
+<li><strong>Slow query log</strong>: Records slow queries.</li>
+<li><strong>Event log</strong>: Displays important events related to the instance.</li>
+</ul>
+</li>
+<li>
+<p>You can customize settings for viewing Logs and Events here, such as the time range you want to view logs or setting up email notifications for important events.</p>
+</li>
+</ol>
+<p>Remember to regularly review logs and events to monitor the status of your Amazon RDS instance and detect any issues early.</p>
+<p><img src="/images/4/00019.png?featherlight=false&amp;width=90pc" alt="Create a VPC"></p>
+<p><img src="/images/4/00020.png?featherlight=false&amp;width=90pc" alt="Create a VPC"></p>
+<p><img src="/images/4/00021.png?featherlight=false&amp;width=90pc" alt="Create a VPC"></p>
+<p><img src="/images/4/00022.png?featherlight=false&amp;width=90pc" alt="Create a VPC"></p>
+<h4 id="viewing-maintenance-and-backups-on-aws-rds">Viewing Maintenance and Backups on AWS RDS</h4>
+<p>In Amazon Web Services (AWS), Amazon Relational Database Service (RDS) provides an easy-to-manage relational database with automation for various tasks, including maintenance and backups. Here&rsquo;s how you can view information about maintenance and backups in AWS RDS:</p>
+<h4 id="viewing-maintenance-information">Viewing Maintenance Information</h4>
+<p>To view information about maintenance for a DB instance in RDS, you can follow these steps:</p>
+<ol>
+<li>
+<p>Sign in to the AWS Management Console.</p>
+</li>
+<li>
+<p>Choose the <strong>Amazon RDS</strong> service from the list of services.</p>
+</li>
+<li>
+<p>In the RDS dashboard, select the DB instance you are interested in.</p>
+</li>
+<li>
+<p>In the DB instance management page, navigate to the <strong>Maintenance &amp; backups</strong> tab.</p>
+</li>
+<li>
+<p>Here, you will see information about the maintenance schedule, including the times when the DB instance will be automatically backed up and maintenance tasks will be performed. You can also view the history of previous maintenance events.</p>
+</li>
+</ol>
+<p><img src="/images/4/00023.png?featherlight=false&amp;width=90pc" alt="Create a VPC"></p>
+<h4 id="viewing-backup-information">Viewing Backup Information</h4>
+<p>To view information about backups of a DB instance in AWS RDS, follow these steps:</p>
+<ol>
+<li>
+<p>Sign in to the AWS Management Console.</p>
+</li>
+<li>
+<p>Choose the <strong>Amazon RDS</strong> service from the list of services.</p>
+</li>
+<li>
+<p>In the RDS dashboard, select the DB instance you want to check.</p>
+</li>
+<li>
+<p>In the DB instance management page, navigate to the <strong>Maintenance &amp; backups</strong> tab.</p>
+</li>
+<li>
+<p>Here, you can view information about automatic backups and manual backups. You can also configure and manage backup settings.</p>
+</li>
+</ol>
+<p>Make sure to follow relevant rules and policies when performing any tasks on AWS RDS to ensure the security and safety of your data.</p>
+<p><img src="/images/4/00024.png?featherlight=false&amp;width=90pc" alt="Create a VPC"></p>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/3-create-ec2/" title="Create EC2 instance"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/5-deploy-app/" title="Application Deployment" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1704857834"></script>
+    <script src="/js/perfect-scrollbar.min.js?1704857834"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1704857834"></script>
+    <script src="/js/jquery.sticky.js?1704857834"></script>
+    <script src="/js/featherlight.min.js?1704857834"></script>
+    <script src="/js/highlight.pack.js?1704857834"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1704857834"></script>
+    <script src="/js/learn.js?1704857834"></script>
+    <script src="/js/hugo-learn.js?1704857834"></script>
+
+    <link href="/mermaid/mermaid.css?1704857834" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1704857834"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158079754-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

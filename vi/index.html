@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="vi" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.99.1" />
+    <meta name="description" content="">
+<meta name="author" content="journeyoftheaverageguy@gmail.com">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Bắt đầu với Amazon RDS :: BẮT ĐẦU VỚI AMAZON RDS</title>
+
+    
+    <link href="/css/nucleus.css?1704857834" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1704857834" rel="stylesheet">
+    <link href="/css/hybrid.css?1704857834" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1704857834" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1704857834" rel="stylesheet">
+    <link href="/css/auto-complete.css?1704857834" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1704857834" rel="stylesheet">
+    <link href="/css/theme.css?1704857834" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1704857834" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1704857834" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1704857834"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/vi/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1704857834"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1704857834"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/vi";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1704857834"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/" title="Giới thiệu" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/">
+           <b> 1. </b> Giới thiệu
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/2-prerequiste/" title="Các bước chuẩn bị" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/2-prerequiste/">
+           <b> 2. </b> Các bước chuẩn bị
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/2-prerequiste/1-create-vpc/" title="Tạo VPC" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/2-prerequiste/1-create-vpc/">
+           <b> 2.1 </b> Tạo VPC
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/2-prerequiste/2-create-ec2-sg/" title="Tạo EC2 Security Group" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/2-prerequiste/2-create-ec2-sg/">
+           <b> 2.2 </b> Tạo EC2 Security Group
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/2-prerequiste/3-create-db-sg/" title="Tạo RDS Security group" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/2-prerequiste/3-create-db-sg/">
+           <b> 2.3 </b> Tạo RDS Security group
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/2-prerequiste/4-create-db-subnetgroup/" title="Tạo DB Subnet Group" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/2-prerequiste/4-create-db-subnetgroup/">
+           <b> 2.4 </b> Tạo DB Subnet Group
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/3-create-ec2/" title="Tạo EC2 instance" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/3-create-ec2/">
+           <b> 3. </b> Tạo EC2 instance
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/4-create-rds/" title="Tạo RDS database instance" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/4-create-rds/">
+           <b> 4. </b> Tạo RDS database instance
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-deploy-app/" title="Triển khai ứng dụng" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-deploy-app/">
+           <b> 5. </b> Triển khai ứng dụng
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/6-backup/" title="Backup và restore" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/6-backup/">
+           <b> 6. </b> Backup và restore
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/7-cleanup/" title="Dọn dẹp tài nguyên" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/7-cleanup/">
+           <b> 7. </b> Dọn dẹp tài nguyên
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="http://awsstudygroup.com"><i class='fab fa-aws'></i> AWS Study Group - Blog</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj"><i class='fab fa-facebook'></i> AWS Study Group - Nhóm FB</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="/">English</option>
+                    
+                  
+              
+                  
+              
+          
+              
+              
+                  
+              
+                  
+                    
+                    
+                      <option id="vi" value="/vi/" selected>Tiếng Việt</option>
+                    
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    
+     <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7831196&style=0038&nbdigits=9&type=page&initCount=0" title="Migrate" Alt="web counter"   border="0" /></a>  <br>
+     <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" Alt="web counter"   border="0"   />
+     
+</left>
+<left>
+    <br>
+    <br>
+        <b> Last Updated </b> <br>
+        <i><font color=orange>10-01-2023</font></i>
+    </left>
+    <left>
+        <br>
+        <br>
+            <b> Team </b> <br>
+           
+            <i>  <br>
+                <a href="https://www.linkedin.com/in/jotaguy"  style="color:orange">Gia Hưng </a> <br>
+        </i>
+        </left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+
+        
+
+<span id="sidebar-toggle-span">
+<a href="#" id="sidebar-toggle" data-sidebar-toggle=""><i class="fas fa-bars"></i> navigation</a>
+</span>
+
+ 
+<h1 id="amazon-relational-database-service-amazon-rds">Amazon Relational Database Service (Amazon RDS)</h1>
+<ul>
+<li>
+<p><strong>Amazon Relational Database Service (Amazon RDS)</strong> là một dịch vụ quản lý cho phép bạn triển khai và quản lý các cơ sở dữ liệu quan hệ trên AWS.</p>
+</li>
+<li>
+<p>Amazon RDS là loại cơ sở dữ liệu xử lý giao dịch trực tuyến (OLTP).</p>
+</li>
+<li>
+<p>Trường hợp sử dụng chính là cơ sở dữ liệu giao dịch (thay vì cơ sở dữ liệu phân tích).</p>
+</li>
+<li>
+<p>Nó phù hợp nhất với các yêu cầu lưu trữ dữ liệu có cấu trúc và quan hệ.</p>
+</li>
+<li>
+<p>Nó nhằm mục tiêu là một tùy chọn thay thế dễ dàng cho các instance trên nơi làm việc truyền thống của cùng loại cơ sở dữ liệu.</p>
+</li>
+<li>
+<p>Các bản sao lưu tự động và việc vá lỗ được thực hiện trong các khung giờ bảo trì được xác định bởi khách hàng.</p>
+</li>
+<li>
+<p>Việc mở rộng, sao chép và tính sẵn có chỉ cần một nút nhấn.</p>
+</li>
+</ul>
+<p><img src="/images/0001.png?featherlight=false&amp;width=90pc" alt="Create a VPC"></p>
+<ul>
+<li>
+<p>Amazon RDS hỗ trợ các hệ thống cơ sở dữ liệu sau:</p>
+<ul>
+<li>Amazon Aurora.</li>
+<li>MySQL.</li>
+<li>MariaDB.</li>
+<li>Oracle.</li>
+<li>SQL Server.</li>
+<li>PostgreSQL.</li>
+</ul>
+</li>
+<li>
+<p>RDS là một dịch vụ được quản lý và bạn không có quyền truy cập vào máy chủ EC2 cơ bản (không có quyền truy cập root).</p>
+</li>
+<li>
+<p>Ngoại lệ đối với quy tắc trên là <strong>Amazon RDS Custom</strong>, cho phép truy cập vào hệ điều hành cơ bản. Điều này mới và có sẵn cho một số DB Engine giới hạn và không xuất hiện trong bài kiểm tra (exam) hiện tại.</p>
+</li>
+<li>
+<p>Dịch vụ quản lý Amazon RDS bao gồm các tính năng sau:</p>
+<ul>
+<li>Bảo mật và vá lỗ cho các DB instances.</li>
+<li>Sao lưu tự động cho các DB instances.</li>
+<li>Cập nhật phần mềm cho DB engine.</li>
+<li>Mở rộng dễ dàng cho lưu trữ và tính toán.</li>
+<li>Tùy chọn Multi-AZ với sao chép đồng bộ.</li>
+<li>Tự động chuyển giao cho tùy chọn Multi-AZ.</li>
+<li>Tùy chọn sao chép đọc cho các tải công việc nặng đọc.</li>
+<li>Một DB instance là môi trường cơ sở dữ liệu trong đám mây với tài nguyên tính toán và lưu trữ mà bạn chỉ định.</li>
+</ul>
+</li>
+<li>
+<p>Các DB instance được truy cập thông qua các điểm cuối (endpoints).</p>
+</li>
+<li>
+<p>Các điểm cuối có thể được truy xuất thông qua mô tả DB instance trong AWS Management Console, API DescribeDBInstances hoặc lệnh describe-db-instances.</p>
+</li>
+<li>
+<p>Mặc định, khách hàng được phép có tối đa 40 DB instances Amazon RDS (chỉ có 10 trong số này có thể là Oracle hoặc MS SQL trừ khi bạn có giấy phép riêng của mình).</p>
+</li>
+<li>
+<p>Cửa sổ bảo trì được cấu hình để cho phép thực hiện các sửa đổi DB instances như mở rộng và cài đặt phần mềm vá (một số hoạt động yêu cầu DB instance phải tắt một thời gian ngắn).</p>
+</li>
+<li>
+<p>Bạn có thể xác định cửa sổ bảo trì hoặc AWS sẽ lên lịch cho một cửa sổ 30 phút.</p>
+</li>
+<li>
+<p>Xác thực tích hợp với Windows chỉ hoạt động với SQL khi sử dụng các miền được tạo bằng dịch vụ thư mục AWS - cần thiết lập một mối tin tưởng với thư mục AD trên nơi làm việc truyền thống.</p>
+</li>
+</ul>
+<h4 id="sự-kiện-và-thông-báo">Sự kiện và Thông báo:</h4>
+<ul>
+<li>Amazon RDS sử dụng AWS SNS để gửi sự kiện RDS qua thông báo SNS.</li>
+<li>Bạn có thể sử dụng các cuộc gọi API đến dịch vụ Amazon RDS để liệt kê các sự kiện RDS trong 14 ngày qua (API DescribeEvents).</li>
+<li>Bạn có thể xem các sự kiện trong 14 ngày qua bằng dòng lệnh CLI.</li>
+<li>Sử dụng AWS Console, bạn chỉ có thể xem các sự kiện RDS trong 1 ngày qua.</li>
+</ul>
+<h4 id="sử-dụng-các-lựa-chọn-thay-thế-và-anti-patterns">Sử Dụng, Các Lựa Chọn Thay Thế và Anti-Patterns</h4>
+<p>Bảng dưới đây cung cấp hướng dẫn về khi nào nên sử dụng RDS và một số dịch vụ lưu trữ dữ liệu cơ sở dữ liệu AWS khác:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Dịch Vụ Lưu Trữ Dữ Liệu</strong></th>
+<th><strong>Khi Nào Sử Dụng</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cơ Sở Dữ Liệu trên EC2</td>
+<td>Kiểm soát tối đa về cơ sở dữ liệu, ưa chuộng DB không có sẵn trên RDS</td>
+</tr>
+<tr>
+<td>Amazon RDS</td>
+<td>Cần cơ sở dữ liệu quan hệ truyền thống cho giao dịch trực tiếp (OLTP), dữ liệu của bạn được hình thành và có cấu trúc tốt, ứng dụng hiện có yêu cầu RDBMS</td>
+</tr>
+<tr>
+<td>Amazon DynamoDB</td>
+<td>Dữ liệu cặp tên/giá trị hoặc cấu trúc dữ liệu không dự đoán được, hiệu suất trong bộ nhớ với tính bền vững, nhu cầu I/O cao, mở rộng một cách động</td>
+</tr>
+<tr>
+<td>Amazon RedShift</td>
+<td>Khối lượng lớn dữ liệu, chủ yếu là tải làm phân tích trực quan (OLAP)</td>
+</tr>
+<tr>
+<td>Amazon Neptune</td>
+<td>Mối quan hệ giữa các đối tượng là một phần quan trọng của giá trị dữ liệu</td>
+</tr>
+<tr>
+<td>Amazon Elasticache</td>
+<td>Lưu trữ tạm thời nhanh cho lượng dữ liệu nhỏ, dữ liệu biến động cao</td>
+</tr>
+<tr>
+<td>Amazon S3</td>
+<td>Đối tượng nhị phân lớn (BLOBs), các trang web tĩnh</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tùy Chọn Thay Thế cho Amazon RDS:</strong></p>
+<p>Nếu trường hợp sử dụng của bạn không được hỗ trợ trên RDS, bạn có thể chạy cơ sở dữ liệu trên Amazon EC2.</p>
+<p>Xem xét những điểm sau khi xem xét DB trên EC2:</p>
+<ul>
+<li>Bạn có thể chạy bất kỳ cơ sở dữ liệu nào bạn thích với sự kiểm soát đầy đủ và tính linh hoạt tối đa.</li>
+<li>Bạn phải quản lý mọi thứ như sao lưu, dự phòng, cập nhật và mở rộng.</li>
+<li>Lựa chọn tốt nếu bạn cần một cơ sở dữ liệu mà RDS chưa hỗ trợ, chẳng hạn như IBM DB2 hoặc SAP HANA.</li>
+<li>Lựa chọn tốt nếu việc di chuyển sang cơ sở dữ liệu do AWS quản lý không khả thi.</li>
+</ul>
+<p><strong>Anti-Patterns:</strong></p>
+<p>Anti-patterns là những mẫu thiết kế hoặc phát triển cụ thể trong kiến trúc hoặc phát triển mà được xem xét là không tốt hoặc thực hành không tối ưu - tức là có thể có một dịch vụ hoặc phương pháp tốt hơn để đạt được kết quả tốt nhất.</p>
+<p>Bảng dưới đây mô tả các yêu cầu không phù hợp cho RDS:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Yêu Cầu</strong></th>
+<th><strong>Dịch Vụ Thích Hợp Hơn</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nhiều đối tượng nhị phân lớn (BLOBs)</td>
+<td>S3</td>
+</tr>
+<tr>
+<td>Khả năng tự động mở rộng</td>
+<td>DynamoDB</td>
+</tr>
+<tr>
+<td>Cấu trúc Dữ Liệu Tên/Giá Trị</td>
+<td>DynamoDB</td>
+</tr>
+<tr>
+<td>Dữ liệu không có cấu trúc hoặc không dự đoán được</td>
+<td>DynamoDB</td>
+</tr>
+<tr>
+<td>Các nền tảng cơ sở dữ liệu khác như IBM DB2 hoặc SAP HANA</td>
+<td>EC2</td>
+</tr>
+<tr>
+<td>Kiểm soát hoàn toàn trên cơ sở dữ liệu</td>
+<td>EC2</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mã Hóa:</strong></p>
+<p>Bạn có thể mã hóa các trường hợp và bản chụp Amazon RDS của bạn khi nghỉ bằng cách bật tùy chọn mã hóa cho trường hợp Amazon RDS DB của bạn.</p>
+<p>Mã hóa khi nghỉ được hỗ trợ cho tất cả các loại DB và sử dụng AWS KMS.</p>
+<p>Khi sử dụng mã hóa khi nghỉ, các yếu tố sau cũng được mã hóa:</p>
+<ul>
+<li>Tất cả bản chụp DB.</li>
+<li>Sao lưu.</li>
+<li>Lưu trữ trường hợp DB.</li>
+<li>Read Replicas.</li>
+</ul>
+<p>Bạn không thể mã hóa một DB hiện có, bạn cần tạo một bản chụp, sao chép nó, mã hóa bản sao, sau đó xây dựng một DB đã được mã hóa từ bản chụp.</p>
+<p>Dữ liệu được mã hóa khi nghỉ bao gồm lưu trữ cơ bản cho một trường hợp DB, sao lưu tự động của nó, Read Replicas và các bản chụp.</p>
+<p>Một bản sao Read của một trường hợp RDS được mã hóa cũng bằng cách sử dụng cùng một khóa với trường hợp chính khi cả hai ở trong cùng một AZ.</p>
+<p>Nếu trường hợp chính và Read Replica ở trong các AZ khác nhau, bạn sẽ mã hóa bằng cách sử dụng khóa mã hóa cho AZ đó.</p>
+<p>Bạn không thể có một bản sao Read đã mã hóa của một trường hợp DB chưa mã hóa hoặc một bản sao Read chưa mã hóa của một trường hợp DB đã mã hóa.</p>
+<p>Mã hóa/giải mã được xử lý một cách trong suốt.</p>
+<p>RDS hỗ trợ mã hóa SSL giữa các ứng dụng và trường hợp DB RDS.</p>
+<p>RDS tạo chứng chỉ cho trường hợp.</p>
+<p><strong>Nhóm DB Subnet group:</strong></p>
+<p>Nhóm DB Subnet group là một tập hợp các subnet group (thường là riêng tư) mà bạn tạo trong một VPC và sau đó bạn chỉ định cho các trường hợp DB của bạn.</p>
+<p>Mỗi nhóm DB Subnet group nên có các subnet group trong ít nhất hai AZ khả dụng trong một AZ cụ thể.</p>
+<p>Đề xuất cấu hình một nhóm subnet group với các subnet group trong mỗi AZ (thậm chí cho các trường hợp độc lập).</p>
+<p>Trong quá trình tạo trường hợp RDS, bạn có thể chọn nhóm DB Subnet group và AZ trong nhóm để đặt trường hợp RDS DB vào đó.</p>
+<p>Bạn không thể chọn địa chỉ IP trong subnet group được cấp.</p>
+<p><strong>Thanh Toán và Cung Cấp</strong></p>
+<p>AWS tính phí cho:</p>
+<ul>
+<li>Giờ trường hợp DB (giờ phần làm tròn lên giờ đầy đủ).</li>
+<li>Lưu trữ GB/tháng.</li>
+<li>Yêu cầu I/O/tháng - cho lưu trữ từ tính.</li>
+<li>Provisioned IOPS/tháng - cho RDS SSD IOPS được cung cấp.</li>
+<li>Truyền dữ liệu ra ngoài.</li>
+<li>Lưu trữ sao lưu (sao lưu DB và bản chụp thủ công).</li>
+</ul>
+<p>Lưu trữ sao lưu cho sao lưu tự động RDS là miễn phí cho đến kích thước ổ EBS đã được cung cấp.</p>
+<p>Tuy nhiên, AWS sao chép dữ liệu qua nhiều AZ và do đó bạn phải trả tiền cho không gian lưu trữ thêm trên S3.</p>
+<p>Đối với đa-AZ, bạn phải trả tiền cho:</p>
+<ul>
+<li>Giờ DB đa-AZ.</li>
+<li>Lưu trữ được cung cấp.</li>
+<li>Ghi I/O hai lần.</li>
+<li>Đối với đa-AZ, bạn không phải trả phí cho truyền dữ liệu DB trong quá trình sao chép từ trường hợp chính sang trạng thái đứng.</li>
+</ul>
+<p>Giấy phép Oracle và Microsoft SQL được bao gồm, hoặc bạn có thể tự mang (BYO).</p>
+<p>Giá ứng dụng dự phòng và giá ứng dụng dự phòng có sẵn.</p>
+<p>Giấy phép ứng dụng dự phòng được định nghĩa dựa trên các thuộc tính sau đây không được thay đổi:</p>
+<ul>
+<li>DB engine.</li>
+<li>Lớp trường hợp DB.</li>
+<li>Loại triển khai (độc lập, đa-AZ).</li>
+<li>Mô hình giấy phép.</li>
+<li>AZ.</li>
+</ul>
+<p>Giấy phép ứng dụng dự phòng:</p>
+<ul>
+<li>Có thể di chuyển giữa các AZ trong cùng một AZ.</li>
+<li>Có sẵn cho các triển khai đa-AZ.</li>
+<li>Có thể áp dụng cho các bản sao Read nếu lớp trường hợp DB và AZ giống nhau.</li>
+</ul>
+<p>Tính khả năng mở rộng được đạt được thông qua việc thay đổi lớp trường hợp để tính toán và điều chỉnh dung lượng lưu trữ bổ sung.</p>
+<p><strong>Khả Năng Mở Rộng</strong></p>
+<p>Bạn chỉ có thể mở rộng RDS lên (tính toán và lưu trữ).</p>
+<p>Bạn không thể giảm lưu trữ được cấp cho trường hợp RDS.</p>
+<p>Bạn có thể mở rộng lưu trữ và thay đổi loại lưu trữ cho tất cả các DB engine ngoại trừ MS SQL.</p>
+<p>Đối với MS SQL, giải pháp tạm thời là tạo một trường hợp mới từ một bản chụp có cấu hình mới.</p>
+<p>Việc mở rộng lưu trữ có thể xảy ra trong khi trường hợp RDS đang chạy mà không gây ra sự cố, tuy nhiên có thể có sự suy giảm hiệu suất.</p>
+<p>Việc mở rộng tính toán sẽ gây ra thời gian ngừng hoạt động.</p>
+<p>Bạn có thể chọn để thay đổi có hiệu lực ngay lập tức, tuy nhiên mặc định là trong cửa sổ bảo trì.</p>
+<p>Yêu cầu mở rộng được áp dụng trong cửa sổ bảo trì được chỉ định trừ khi sử dụng &ldquo;áp dụng ngay lập tức&rdquo;.</p>
+<p>Tất cả các loại DB RDS hỗ trợ kích thước DB tối đa là 64 TiB ngoại trừ Microsoft SQL Server (16 TiB).</p>
+<p><strong>Hiệu Năng</strong></p>
+<p>Amazon RDS sử dụng ổ đĩa EBS (không sử dụng lưu trữ trường hợp) cho lưu trữ DB và log.</p>
+<p>Có ba loại lưu trữ có sẵn: Mục Đích Chung (SSD), Provisioned IOPS (SSD), và từ tính (Magnetic).</p>
+<p>Mục Đích Chung (SSD):</p>
+<ul>
+<li>Sử dụng cho các tải công việc cơ sở dữ liệu có nhu cầu I/O trung bình.</li>
+<li>Hiệu quả về chi phí.</li>
+<li>Còn được gọi là gp2.</li>
+<li>3 IOPS/GB.</li>
+<li>Burst lên đến 3000 IOPS.</li>
+</ul>
+<p>Provisioned IOPS (SSD):</p>
+<ul>
+<li>Sử dụng cho công việc có yêu cầu I/O cao.</li>
+<li>Độ trễ thấp và I/O đều đặn.</li>
+<li>Số IOPS được chỉ định bởi người dùng (xem bảng bên dưới).</li>
+<li>Đối với lưu trữ IOPS được cấp, bảng dưới đây cho thấy phạm vi IOPS được cấp và phạm vi kích thước lưu trữ cho mỗi động cơ cơ sở dữ liệu.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>Tên Động Cơ Cơ Sở Dữ Liệu</strong></th>
+<th><strong>Phạm Vi IOPS Được Cấp</strong></th>
+<th><strong>Phạm Vi Kích Thước Lưu Trữ</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MariaDB</td>
+<td>1.000-80.000 IOPS</td>
+<td>100 GiB-64TiB</td>
+</tr>
+<tr>
+<td>SQL Server</td>
+<td>1.000-64.000 IOPS</td>
+<td>20 GiB-16TiB</td>
+</tr>
+<tr>
+<td>MySQL</td>
+<td>1.000-80.000 IOPS</td>
+<td>100 GiB-64TiB</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>1.000-256.000 IOPS</td>
+<td>100 GiB-64TiB</td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td>1.000-80.000 IOPS</td>
+<td>100 GiB-64TiB</td>
+</tr>
+</tbody>
+</table>
+<p>Từ Tính (Magnetic):</p>
+<ul>
+<li>Không còn được khuyến nghị nữa, có sẵn cho tích hợp ngược.</li>
+<li>Không cho phép bạn mở rộng lưu trữ khi sử dụng động cơ cơ sở dữ liệu SQL Server.</li>
+<li>Không hỗ trợ ổ đĩa co giãn.</li>
+<li>Giới hạn tối đa 4 TiB.</li>
+<li>Giới hạn tối đa 1.000 IOPS.</li>
+</ul>
+<h4 id="multi-az-và-read-replicas">Multi-AZ và Read Replicas</h4>
+<p>Multi-AZ và Read Replicas được sử dụng để đảm bảo tính sẵn có cao, khả năng chịu lỗi và mở rộng hiệu suất.</p>
+<p>Bảng dưới đây so sánh các triển khai Multi-AZ và Read Replicas:</p>
+<table>
+<thead>
+<tr>
+<th>Multi-AZ Deployments (Triển khai Multi-AZ)</th>
+<th>Read Replicas (Read Replicas)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Replication đồng bộ - bền vững cao</td>
+<td>Replication không đồng bộ - mở rộng cao</td>
+</tr>
+<tr>
+<td>Chỉ có cơ sở dữ liệu trên primary instance là hoạt động</td>
+<td>Tất cả read replicas đều có thể truy cập và được sử dụng để mở rộng đọc</td>
+</tr>
+<tr>
+<td>Sao lưu tự động được thực hiện từ standby</td>
+<td>Không có sao lưu được cấu hình mặc định</td>
+</tr>
+<tr>
+<td>Luôn luôn bao gồm hai vùng khả dụng trong một AZ duy nhất</td>
+<td>Có thể nằm trong một Availability Zone, Cross-AZ hoặc Cross-Region</td>
+</tr>
+<tr>
+<td>Các instance của cơ sở dữ liệu được nâng cấp trên primary</td>
+<td>Việc nâng cấp instance của cơ sở dữ liệu độc lập với instance nguồn</td>
+</tr>
+<tr>
+<td>Tự động chuyển đổi sang standby khi phát hiện sự cố</td>
+<td>Có thể được thăng cấp thủ công thành một instance cơ sở dữ liệu độc lập</td>
+</tr>
+</tbody>
+</table>
+<h4 id="multi-az">Multi-AZ</h4>
+<ul>
+<li>Multi-AZ RDS tạo một bản sao ở AZ (AZ) khác và sao chép đồng bộ đến đó (chỉ dành cho DR).</li>
+<li>Có tùy chọn để chọn Multi-AZ trong quá trình tạo.</li>
+<li>AWS khuyên nên sử dụng lưu trữ provisioned IOPS cho các trường hợp DB RDS Multi-AZ.</li>
+<li>Mỗi AZ chạy trên cơ sở hạ tầng riêng biệt, độc lập về vật lý và được thiết kế để đảm bảo tính tin cậy cao.</li>
+<li>Bạn không thể chọn AZ nào trong AZ sẽ được chọn để tạo bản sao DB dự phòng.</li>
+<li>Bạn có thể xem AZ nào mà bản sao DB dự phòng được tạo ra.</li>
+<li>Failover có thể được kích hoạt trong các trường hợp sau:
+<ul>
+<li>Mất AZ chính hoặc lỗi trạng thái DB chính.</li>
+<li>Mất kết nối mạng với DB chính.</li>
+<li>Lỗi đơn vị tính toán (EC2) trên DB chính.</li>
+<li>Lỗi đơn vị lưu trữ (EBS) trên DB chính.</li>
+<li>Thay đổi DB chính.</li>
+<li>Cập nhật hệ điều hành trên DB chính.</li>
+<li>Failover thủ công (khởi động lại với lựa chọn failover được chọn trên DB chính).</li>
+</ul>
+</li>
+<li>Trong quá trình failover, RDS tự động cập nhật cấu hình (bao gồm điểm cuối DNS) để sử dụng nút thứ hai.</li>
+<li>Tùy thuộc vào lớp instance, có thể mất từ 1 đến vài phút để failover đến bản sao DB dự phòng.</li>
+<li>Được đề xuất triển khai việc thử lại kết nối DB trong ứng dụng của bạn.Read Replicas</li>
+<li>Được đề xuất sử dụng điểm cuối thay vì địa chỉ IP để chỉ định ứng dụng đến DB RDS.</li>
+<li>Cách để khởi đầu failover của DB RDS dự phòng thủ công là khởi động lại và chọn tùy chọn failover.</li>
+<li>Yêu cầu khởi động lại DB để thay đổi cấu hình nhóm tham số DB hoặc khi bạn thay đổi tham số DB tĩnh.</li>
+<li>Nhóm tham số DB là một hộp chứa cấu hình cho động cơ DB.</li>
+<li>Bạn sẽ nhận được thông báo từ sự kiện DB khi failover xảy ra.</li>
+<li>Bản sao DB thứ cấp trong cấu hình Multi-AZ không thể được sử dụng như một nút đọc độc lập (đọc hoặc ghi).</li>
+<li>Không tính phí cho việc truyền dữ liệu giữa các trường hợp RDS chính và dự phòng.</li>
+<li>Các nâng cấp hệ thống như việc cập nhật hệ điều hành, thay đổi kích thước DB Instance và các nâng cấp hệ thống được áp dụng trước tiên trên replicas trước khi failover và sửa đổi DB Instance khác.</li>
+<li>Trong cấu hình Multi-AZ, các bản snapshot và sao lưu tự động được thực hiện trên replicas để tránh tạm dừng I/O trên trường hợp DB chính.</li>
+</ul>
+<h4 id="hỗ-trợ-read-replicas--cho-multi-az">Hỗ trợ Read Replicas  cho Multi-AZ:</h4>
+<ul>
+<li>Amazon RDS Read Replicas  cho MySQL, MariaDB, PostgreSQL và Oracle hỗ trợ các triển khai Multi-AZ.</li>
+<li>Kết hợp Read Replicas  với Multi-AZ cho phép bạn xây dựng một chiến lược phục hồi thảm họa chắc chắn và đơn giản hóa quá trình nâng cấp động cơ cơ sở dữ liệu của bạn.</li>
+<li>Một read snapshot ở một AZ khác so với cơ sở dữ liệu nguồn có thể được sử dụng như một cơ sở dữ liệu dự phòng và được thúc đẩy để trở thành cơ sở dữ liệu sản xuất mới trong trường hợp có sự cố vùng.</li>
+<li>Điều này cho phép bạn mở rộng khả năng đọc đồng thời cũng như có Multi-AZ cho DR.</li>
+</ul>
+<h4 id="quy-trình-thực-hiện-các-hoạt-động-bảo-trì-như-sau">Quy trình thực hiện các hoạt động bảo trì như sau:</h4>
+<ol>
+<li>Thực hiện các hoạt động trên replicas.</li>
+<li>Thúc đẩy replicas để trở thành primary .</li>
+<li>Thực hiện các hoạt động trên replicas mới (primary  bị hạ cấp).</li>
+</ol>
+<h5 id="bạn-có-thể-nâng-cấp-thủ-công-một-db-instance-lên-phiên-bản-động-cơ-db-được-hỗ-trợ-từ-aws-console">Bạn có thể nâng cấp thủ công một DB instance lên phiên bản động cơ DB được hỗ trợ từ AWS Console.</h5>
+<ul>
+<li>Theo mặc định, nâng cấp sẽ có hiệu lực trong cửa sổ bảo trì tiếp theo.</li>
+<li>Bạn có thể tùy chọn buộc nâng cấp ngay lập tức.</li>
+<li>Trong các triển khai Multi-AZ, nâng cấp phiên bản sẽ được thực hiện trên cả primary  và replicas cùng một lúc, gây ra sự cố cho cả hai DB Instance.</li>
+<li>Đảm bảo các SG và NACL sẽ cho phép máy chủ ứng dụng của bạn giao tiếp với cả primary và replicas.</li>
+</ul>
+<h4 id="read-replicas">Read Replicas</h4>
+<p>Read Replicas được sử dụng cho các cơ sở dữ liệu có tải đọc nhiều và sao chép là không đồng bộ.</p>
+<p>Read Replicas được sử dụng để chia sẻ và giảm tải công việc làm.</p>
+<p>Read Replicas cung cấp khả năng khôi phục dữ liệu ở chế độ chỉ đọc.</p>
+<p>Read Replicas được tạo ra từ một bản snapshot của bản chính.</p>
+<p>Phải bật tính năng sao lưu tự động trên bản chính (thời gian lưu trữ &gt; 0).</p>
+<p>Chỉ được hỗ trợ cho các động cơ lưu trữ cơ sở dữ liệu giao dịch (InnoDB không phải InnoDB).</p>
+<p>Read Replicas có sẵn cho MySQL, PostgreSQL, MariaDB, Oracle, Aurora và SQL Server.</p>
+<p>Đối với các động cơ cơ sở dữ liệu MySQL, MariaDB, PostgreSQL và Oracle, Amazon RDS tạo ra một bản thứ hai sử dụng bản snapshot của bản chính.</p>
+<p>Sau đó, nó sử dụng sao chép không đồng bộ tự nhiên của các động cơ để cập nhật Read Replicas mỗi khi có sự thay đổi đối với bản chính.</p>
+<p>Amazon Aurora sử dụng một lớp lưu trữ ảo được hỗ trợ bởi SSD, được thiết kế đặc biệt cho tải công việc làm cơ sở dữ liệu.</p>
+<p>Bạn có thể tạo snapshot của các Read Replicas PostgreSQL nhưng không thể bật sao lưu tự động.</p>
+<p>Bạn có thể bật sao lưu tự động trên các Read Replicas MySQL và MariaDB.</p>
+<p>Bạn có thể bật viết trên các Read Replicas MySQL và MariaDB.</p>
+<p>Bạn có thể có tối đa 5 Read Replicas của một cơ sở dữ liệu sản xuất.</p>
+<p>Bạn không thể có nhiều hơn bốn bản sao tham gia trong chuỗi sao chép.</p>
+<p>Bạn có thể có Read Replicas của các Read Replicas cho MySQL và MariaDB nhưng không cho PostgreSQL.</p>
+<p>Cấu hình Read Replicas có thể được thiết lập từ Giao diện AWS hoặc API.</p>
+<p>Bạn có thể chỉ định khu vực ra đời của Read Replicas.</p>
+<p>Loại lưu trữ và lớp bản chính của các Read Replicas có thể khác nhau so với nguồn, nhưng tính toán phải ít nhất là hiệu suất của nguồn.</p>
+<p>Bạn không thể thay đổi động cơ cơ sở dữ liệu.</p>
+<p>Trong trường hợp mất kết nối đa khu vực, các Read Replicas được chuyển sang bản chính mới.</p>
+<p>Read Replicas phải được xóa một cách tường tận.</p>
+<p>Nếu một bản chính bị xóa mà không xóa các bản sao, mỗi bản sao trở thành một bản chính độc lập tại một khu vực một khu vực.</p>
+<p>Bạn có thể thăng cấp một Read Replicas thành bản chính.</p>
+<p>Việc thăng cấp Read Replicas mất vài phút.</p>
+<p>Các Read Replicas được thăng cấp giữ lại:</p>
+<ul>
+<li>Thời gian lưu trữ sao lưu.</li>
+<li>Cửa sổ sao lưu.</li>
+<li>Nhóm tham số cơ sở dữ liệu.</li>
+<li>Các Read Replicas hiện có vẫn hoạt động như bình thường.</li>
+</ul>
+<p>Mỗi Read Replicas có một điểm cuối DNS riêng.</p>
+<p>Các Read Replicas có thể được bật đa khu vực và bạn có thể tạo các Read Replicas từ các cơ sở dữ liệu nguồn đa khu vực.</p>
+<p>Các Read Replicas có thể nằm ở khu vực khác (sử dụng sao chép không đồng bộ).</p>
+<p>Cấu hình này có thể được sử dụng để tập trung dữ liệu từ các khu vực khác nhau cho mục đích phân tích.</p>
+<h4 id="db-snapshots">DB Snapshots</h4>
+<p>DB Snapshots là các tình huống do người dùng khởi tạo và cho phép bạn sao lưu DB instance của bạn ở trong một trạng thái xác định bất kỳ thường xuyên như bạn muốn, sau đó khôi phục về trạng thái cụ thể đó.</p>
+<p>Không thể sử dụng để khôi phục tại điểm thời gian cụ thể.</p>
+<p>Các Snapshot được lưu trữ trên S3.</p>
+<p>Snapshot sẽ tồn tại trên S3 cho đến khi bị xóa bằng cách thủ công.</p>
+<p>Sao lưu được thực hiện trong một khoảng thời gian đã được định.</p>
+<p>I/O tạm ngừng trong thời gian sao lưu và có thể làm tăng độ trễ (áp dụng cho RDS chỉ có một vùng khu vực).</p>
+<p>Các DB Snapshot được thực hiện bằng cách thủ công sẽ được lưu trữ ngay cả sau khi DB instance RDS bị xóa.</p>
+<p>Các DB được khôi phục sẽ luôn là một DB instance RDS mới với một điểm cuối DNS mới.</p>
+<p>Có thể khôi phục lên đến 5 phút trước.</p>
+<p>Chỉ có các tham số DB mặc định và các nhóm bảo mật được khôi phục - bạn phải liên kết các tham số DB và SG khác một cách thủ công.</p>
+<p>Nên nên chụp một Snapshot cuối cùng trước khi xóa một DB instance RDS.</p>
+<p>Snapshot có thể chia sẻ với các tài khoản AWS khác.</p>
+<h4 id="các-phương-pháp-có-sẵn-cho-sự-có-sẵn-cao-cấp-cho-cơ-sở-dữ-liệu">Các phương pháp Có sẵn cho Sự có sẵn cao cấp cho Cơ sở dữ liệu</h4>
+<p>Nếu có thể, hãy chọn DynamoDB thay vì RDS vì tính chịu lỗi tích hợp.</p>
+<p>Nếu không thể sử dụng DynamoDB, hãy chọn Aurora vì tính dự phòng và tính năng khôi phục tự động.</p>
+<p>Nếu không thể sử dụng Aurora, hãy chọn Multi-AZ RDS.</p>
+<p>Các sao lưu RDS thường xuyên có thể bảo vệ trước sự hỏng hoặc sự cố dữ liệu và chúng không ảnh hưởng đến hiệu suất triển khai Multi-AZ.</p>
+<p>Sao lưu dự phòng khu vực cũng là một lựa chọn nhưng không được đảm bảo sẽ nhất quán mạnh mẽ.</p>
+<p>Nếu cơ sở dữ liệu chạy trên EC2, bạn phải tự thiết kế tính sẵn có.</p>
+<h4 id="di-chuyển-dữ-liệu">Di chuyển dữ liệu</h4>
+<p>Dịch vụ Di chuyển Cơ sở dữ liệu AWS giúp bạn di chuyển cơ sở dữ liệu vào AWS một cách nhanh chóng và an toàn.</p>
+<p>Sử dụng kèm với Công cụ Chuyển đổi Schema (SCT) để di chuyển cơ sở dữ liệu vào RDS AWS hoặc cơ sở dữ liệu dựa trên EC2.</p>
+<p>Cơ sở dữ liệu nguồn vẫn hoạt động hoàn toàn trong quá trình di chuyển, giảm thiểu thời gian chết cho các ứng dụng phụ thuộc vào cơ sở dữ liệu.</p>
+<p>Dịch vụ Di chuyển Cơ sở dữ liệu AWS có thể di chuyển dữ liệu của bạn tới và từ hầu hết các cơ sở dữ liệu thương mại và nguồn mở phổ biến.</p>
+<p>Công cụ Chuyển đổi Schema có thể sao chép các schema cơ sở dữ liệu cho các di chuyển đồng nhất (cùng loại cơ sở dữ liệu) và chuyển đổi các schema cho các di chuyển không đồng nhất (khác loại cơ sở dữ liệu).</p>
+<p>DMS được sử dụng cho các chuyển đổi nhỏ hơn, đơn giản hơn và hỗ trợ MongoDB và DynamoDB.</p>
+<p>SCT được sử dụng cho các bộ dữ liệu lớn hơn, phức tạp hơn như các kho dữ liệu.</p>
+<p>DMS có chức năng sao chép từ nơi trên cơ sở vào AWS hoặc vào Snowball hoặc S3.</p>
+<h4 id="theo-dõi-ghi-log-và-báo-cáo">Theo dõi, Ghi log và Báo cáo</h4>
+<p>Bạn có thể sử dụng các công cụ theo dõi tự động sau để theo dõi Amazon RDS và báo cáo khi có điều gì đó sai:</p>
+<ul>
+<li>Sự kiện Amazon RDS - Đăng ký sự kiện Amazon RDS để được thông báo khi có thay đổi với DB instance, DB snapshot, nhóm tham số DB hoặc nhóm bảo mật DB.</li>
+<li>Các tệp ghi cơ sở dữ liệu - Xem, tải xuống hoặc xem các tệp ghi cơ sở dữ liệu bằng cách sử dụng giao diện Amazon RDS hoặc các thao tác API Amazon RDS. Bạn cũng có thể truy vấn một số tệp ghi cơ sở dữ liệu được nạp vào các bảng cơ sở dữ liệu.</li>
+<li>Amazon RDS Enhanced Monitoring - Xem các số liệu thống kê thời gian thực cho hệ điều hành.</li>
+<li>Amazon RDS Performance Insights - Đánh giá tải trên cơ sở dữ liệu của bạn và xác định khi nào và ở đâu cần thực hiện.</li>
+<li>Amazon RDS Recommendations - Xem các khuyến nghị tự động cho các tài nguyên cơ sở dữ liệu, chẳng hạn như các DB instance, bản sao đọc và nhóm tham số DB.</li>
+</ul>
+<p>Ngoài ra, Amazon RDS tích hợp với Amazon CloudWatch, Amazon EventBridge và AWS CloudTrail cho khả năng theo dõi bổ sung:</p>
+<ul>
+<li>Số liệu CloudWatch - Amazon RDS tự động gửi số liệu đến CloudWatch mỗi phút cho mỗi cơ sở dữ liệu hoạt động. Bạn không phải trả thêm phí cho số liệu Amazon RDS trong CloudWatch.</li>
+<li>Các cảnh báo CloudWatch - Bạn có thể theo dõi một số liệu Amazon RDS duy nhất trong một khoảng thời gian cụ thể. Sau đó, bạn có thể thực hiện một hoặc nhiều hành động dựa trên giá trị của số liệu đối với ngưỡng bạn đặt.</li>
+<li>Các tệp ghi CloudWatch - Hầu hết các động cơ DB cho phép bạn theo dõi, lưu trữ và truy cập các tệp ghi cơ sở dữ liệu của bạn trong CloudWatch Logs.</li>
+<li>Các sự kiện CloudWatch và Amazon EventBridge - Bạn có thể tự động hóa các dịch vụ AWS và phản ứng với các sự kiện hệ thống như vấn đề sẵn sàng ứng dụng hoặc thay đổi tài nguyên. Sự kiện từ các dịch vụ AWS được gửi đến CloudWatch Events và EventBridge gần như trong thời gian thực. Bạn có thể viết các quy tắc đơn giản để chỉ định các sự kiện mà bạn quan tâm và các hành động tự động nào nên thực hiện khi một sự kiện phù hợp với quy tắc.</li>
+<li>AWS CloudTrail - Bạn có thể xem một hồ sơ các hành động được thực hiện bởi người dùng, vai trò hoặc dịch vụ AWS trong Amazon RDS. CloudTrail ghi lại tất cả các cuộc gọi API cho Amazon RDS như sự kiện. Các cuộc gọi này bao gồm cuộc gọi từ giao diện Amazon RDS và từ các cuộc gọi mã vào các thao tác API Amazon RDS. Nếu bạn tạo một dãy, bạn có thể bật giao hàng liên tục của các sự kiện CloudTrail đến một xô Amazon S3, bao gồm các sự kiện cho Amazon RDS. Nếu bạn không cấu hình một dãy, bạn vẫn có thể xem các sự kiện gần đây nhất trong bảng điều khiển CloudTrail trong Lịch sử sự kiện.</li>
+</ul>
+	
+  
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+		
+			<a class="nav nav-next" href="/vi/1-introduce/" title="Giới thiệu" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1704857834"></script>
+    <script src="/js/perfect-scrollbar.min.js?1704857834"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1704857834"></script>
+    <script src="/js/jquery.sticky.js?1704857834"></script>
+    <script src="/js/featherlight.min.js?1704857834"></script>
+    <script src="/js/highlight.pack.js?1704857834"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1704857834"></script>
+    <script src="/js/learn.js?1704857834"></script>
+    <script src="/js/hugo-learn.js?1704857834"></script>
+
+    <link href="/mermaid/mermaid.css?1704857834" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1704857834"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158079754-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
+
