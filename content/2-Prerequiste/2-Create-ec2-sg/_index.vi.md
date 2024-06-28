@@ -1,4 +1,4 @@
----
+<!-- ---
 title : "Tạo EC2 Security Group"
 date :  "`r Sys.Date()`"
 weight : 2
@@ -37,4 +37,4 @@ pre : " <b> 2.2 </b> "
 
 8. Security Group của bạn đã được tạo và bạn có thể gán nó cho các tài nguyên EC2 của bạn để quản lý quyền truy cập vào các cổng này.
 
-![Create a VPC](/images/1/00013.png?featherlight=false&width=90pc)
+![Create a VPC](/images/1/00013.png?featherlight=false&width=90pc) -->

@@ -1,4 +1,4 @@
----
+<!-- ---
 title : "Tạo VPC"
 date :  "`r Sys.Date()`"
 weight : 1
@@ -70,4 +70,4 @@ Mặc định, subnet không mặc định có thuộc tính địa chỉ Public
 4. Ô kiểm Bật tự động gán địa chỉ Public IPv4 (Enable auto-assign public IPv4 address), nếu được chọn, sẽ yêu cầu một địa chỉ Public IPv4 cho tất cả các thể hiện được khởi chạy vào subnet được chọn. Chọn hoặc bỏ chọn ô kiểm theo yêu cầu, sau đó chọn Lưu (Save).
 
 ![Create a VPC](/images/1/0008.png?featherlight=false&width=90pc)
-
+ -->

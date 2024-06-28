@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.99.1" />
+    <meta name="description" content="">
+<meta name="author" content="journeyoftheaverageguy@gmail.com">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Get Started with Amazon RDS :: GET STARTED WITH AMAZON RDS.</title>
+
+    
+    <link href="/css/nucleus.css?1704857834" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1704857834" rel="stylesheet">
+    <link href="/css/hybrid.css?1704857834" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1704857834" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1704857834" rel="stylesheet">
+    <link href="/css/auto-complete.css?1704857834" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1704857834" rel="stylesheet">
+    <link href="/css/theme.css?1704857834" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1704857834" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1704857834" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1704857834"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1704857834"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1704857834"></script>
+<script type="text/javascript">
+    
+        var baseurl = "";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1704857834"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-introduce/" title="Introduction" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-introduce/">
+           <b> 1. </b> Introduction
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/" title="Preparation steps" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-prerequiste/">
+           <b> 2. </b> Preparation steps
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/1-create-vpc/" title="Create a VPC" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-prerequiste/1-create-vpc/">
+           <b> 2.1 </b> Create a VPC
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/2-create-ec2-sg/" title="Create EC2 Security Group" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-prerequiste/2-create-ec2-sg/">
+           <b> 2.2 </b> Create EC2 Security Group
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/3-create-db-sg/" title="Create RDS Security group" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-prerequiste/3-create-db-sg/">
+           <b> 2.3 </b> Create RDS Security group
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/4-create-db-subnetgroup/" title="Create DB Subnet Group" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-prerequiste/4-create-db-subnetgroup/">
+           <b> 2.4 </b> Create DB Subnet Group
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/3-create-ec2/" title="Create EC2 instance" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/3-create-ec2/">
+           <b> 3. </b> Create EC2 instance
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/4-create-rds/" title="Create RDS database instance" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/4-create-rds/">
+           <b> 4. </b> Create RDS database instance
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-deploy-app/" title="Application Deployment" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-deploy-app/">
+           <b> 5. </b> Application Deployment
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/6-backup/" title="Backup and restore" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/6-backup/">
+           <b> 6. </b> Backup and restore
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/7-cleanup/" title="Clean up resources" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/7-cleanup/">
+           <b> 7. </b> Clean up resources
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://aws.amazon.com/blogs"><i class='fab fa-aws'></i> AWS Study Group - Blog</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj"><i class='fab fa-facebook'></i> AWS Study Group - FB Group</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="/" selected>English</option>
+                    
+                  
+              
+                  
+              
+          
+              
+              
+                  
+              
+                  
+                    
+                    
+                      <option id="vi" value="/vi/">Tiếng Việt</option>
+                    
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    
+     <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7831196&style=0038&nbdigits=9&type=page&initCount=0" title="Migrate" Alt="web counter"   border="0" /></a>  <br>
+     <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" Alt="web counter"   border="0"   />
+     
+</left>
+<left>
+    <br>
+    <br>
+        <b> Last Updated </b> <br>
+        <i><font color=orange>10-01-2023</font></i>
+    </left>
+    <left>
+        <br>
+        <br>
+            <b> Team </b> <br>
+           
+            <i>  <br>
+                <a href="https://www.linkedin.com/in/jotaguy"  style="color:orange">Gia Hưng </a> <br>
+        </i>
+        </left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+
+        
+
+<span id="sidebar-toggle-span">
+<a href="#" id="sidebar-toggle" data-sidebar-toggle=""><i class="fas fa-bars"></i> navigation</a>
+</span>
+
+ 
+<h1 id="amazon-relational-database-service-amazon-rds">Amazon Relational Database Service (Amazon RDS)</h1>
+<p>Amazon Relational Database Service (Amazon RDS) is a managed service that you can use to launch and manage relational databases on AWS.</p>
+<p><img src="/images/0001.png?featherlight=false&amp;width=90pc" alt="Create a VPC"></p>
+<h4 id="online-transaction-processing-oltp">Online Transaction Processing (OLTP)</h4>
+<p>Amazon RDS is an Online Transaction Processing (OLTP) type of database.</p>
+<h4 id="primary-use-case">Primary Use Case</h4>
+<p>The primary use case is a transactional database (rather than an analytical database). It is best suited to structured, relational data store requirements.</p>
+<h4 id="drop-in-replacement">Drop-in Replacement</h4>
+<p>It aims to be a drop-in replacement for existing on-premises instances of the same databases.</p>
+<h4 id="features">Features</h4>
+<ul>
+<li>Automated backups and patching are applied in customer-defined maintenance windows.</li>
+<li>Push-button scaling, replication, and redundancy.</li>
+</ul>
+<h4 id="supported-database-engines">Supported Database Engines</h4>
+<p>Amazon RDS supports the following database engines:</p>
+<ul>
+<li>Amazon Aurora</li>
+<li>MySQL</li>
+<li>MariaDB</li>
+<li>Oracle</li>
+<li>SQL Server</li>
+<li>PostgreSQL</li>
+</ul>
+<h4 id="managed-service">Managed Service</h4>
+<p>RDS is a managed service, and you do not have access to the underlying EC2 instance (no root access).</p>
+<p>The exception to the above rule is Amazon RDS Custom, which allows access to the underlying operating system. This is new, available for limited DB engines, and does not appear on the exam yet.</p>
+<h4 id="managed-service-includes">Managed Service Includes</h4>
+<p>The Amazon RDS managed service includes the following:</p>
+<ul>
+<li>Security and patching of the DB instances.</li>
+<li>Automated backup for the DB instances.</li>
+<li>Software updates for the DB engine.</li>
+<li>Easy scaling for storage and compute.</li>
+<li>Multi-AZ option with synchronous replication.</li>
+<li>Automatic failover for Multi-AZ option.</li>
+<li>Read replicas option for read-heavy workloads.</li>
+</ul>
+<h5 id="db-instance">DB Instance</h5>
+<p>A DB instance is a database environment in the cloud with the compute and storage resources you specify.</p>
+<h4 id="access-via-endpoints">Access via Endpoints</h4>
+<p>Database instances are accessed via endpoints. Endpoints can be retrieved via the DB instance description in the AWS Management Console, DescribeDBInstances API, or describe-db-instances command.</p>
+<h4 id="instance-limits">Instance Limits</h4>
+<p>By default, customers are allowed to have up to a total of 40 Amazon RDS DB instances (only 10 of these can be Oracle or MS SQL unless you have your own licenses).</p>
+<h4 id="maintenance-windows">Maintenance Windows</h4>
+<p>Maintenance windows are configured to allow DB instances modifications to take place, such as scaling and software patching (some operations require the DB instance to be taken offline briefly). You can define the maintenance window, or AWS will schedule a 30-minute window.</p>
+<h4 id="windows-integrated-authentication">Windows Integrated Authentication</h4>
+<p>Windows integrated authentication for SQL only works with domains created using the AWS directory service – need to establish a trust with an on-premises AD directory.</p>
+<h4 id="events-and-notifications">Events and Notifications</h4>
+<p>Amazon RDS uses AWS SNS to send RDS events via SNS notifications. You can use API calls to the Amazon RDS service to list the RDS events in the last 14 days (DescribeEvents API). You can view events from the last 14 days using the CLI. Using the AWS Console, you can only view RDS events for the last 1 day.</p>
+<h4 id="use-cases-alternatives-and-anti-patterns">Use Cases, Alternatives, and Anti-Patterns</h4>
+<p>The table below provides guidance on when best to use RDS and several other AWS database/data store services:</p>
+<table>
+<thead>
+<tr>
+<th>Data Store</th>
+<th>When to Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Database on EC2</td>
+<td>- Ultimate control over the database</td>
+</tr>
+<tr>
+<td></td>
+<td>- Preferred DB not available under RDS</td>
+</tr>
+<tr>
+<td>Amazon RDS</td>
+<td>- Need traditional relational database for OLTP</td>
+</tr>
+<tr>
+<td></td>
+<td>- Your data is well-formed and structured</td>
+</tr>
+<tr>
+<td></td>
+<td>- Existing apps requiring RDBMS</td>
+</tr>
+<tr>
+<td>Amazon DynamoDB</td>
+<td>- Name/value pair data or unpredictable data structure</td>
+</tr>
+<tr>
+<td></td>
+<td>- In-memory performance with persistence</td>
+</tr>
+<tr>
+<td></td>
+<td>- High I/O needs</td>
+</tr>
+<tr>
+<td></td>
+<td>- Scale dynamically</td>
+</tr>
+<tr>
+<td>Amazon RedShift</td>
+<td>- Massive amounts of data</td>
+</tr>
+<tr>
+<td></td>
+<td>- Primarily OLAP workloads</td>
+</tr>
+<tr>
+<td>Amazon Neptune</td>
+<td>- Relationships between objects a major portion of data value</td>
+</tr>
+<tr>
+<td>Amazon Elasticache</td>
+<td>- Fast temporary storage for small amounts of data</td>
+</tr>
+<tr>
+<td></td>
+<td>- Highly volatile data</td>
+</tr>
+<tr>
+<td>Amazon S3</td>
+<td>- BLOBs</td>
+</tr>
+<tr>
+<td></td>
+<td>- Static Websites</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Alternative to Amazon RDS:</strong></p>
+<p>If your use case isn&rsquo;t supported on RDS, you can run databases on Amazon EC2.</p>
+<p>Consider the following points when considering a DB on EC2:</p>
+<ul>
+<li>You can run any database you like with full control and ultimate flexibility.</li>
+<li>You must manage everything like backups, redundancy, patching, and scaling.</li>
+<li>Good option if you require a database not yet supported by RDS, such as IBM DB2 or SAP HANA.</li>
+<li>Good option if it is not feasible to migrate to an AWS-managed database.</li>
+</ul>
+<p><strong>Anti-Patterns:</strong></p>
+<p>Anti-patterns are certain patterns in architecture or development that are considered bad or sub-optimal practices – i.e. there may be a better service or method to produce the best result.</p>
+<p>The following table describes requirements that are not a good fit for RDS:</p>
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>More Suitable Service</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lots of large binary objects (BLOBs)</td>
+<td>S3</td>
+</tr>
+<tr>
+<td>Automated Scalability</td>
+<td>DynamoDB</td>
+</tr>
+<tr>
+<td>Name/Value Data Structure</td>
+<td>DynamoDB</td>
+</tr>
+<tr>
+<td>Data is not well structured or unpredictable</td>
+<td>DynamoDB</td>
+</tr>
+<tr>
+<td>Other database platforms like IBM DB2 or SAP HANA</td>
+<td>EC2</td>
+</tr>
+<tr>
+<td>Complete control over the database</td>
+<td>EC2</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Encryption:</strong></p>
+<p>You can encrypt your Amazon RDS instances and snapshots at rest by enabling the encryption option for your Amazon RDS DB instance.</p>
+<p>Encryption at rest is supported for all DB types and uses AWS KMS.</p>
+<p>When using encryption at rest, the following elements are also encrypted:</p>
+<ul>
+<li>All DB snapshots.</li>
+<li>Backups.</li>
+<li>DB instance storage.</li>
+<li>Read Replicas.</li>
+</ul>
+<p>You cannot encrypt an existing DB; you need to create a snapshot, copy it, encrypt the copy, then build an encrypted DB from the snapshot.</p>
+<p>Data that is encrypted at rest includes the underlying storage for a DB instance, its automated backups, Read Replicas, and snapshots.</p>
+<p>A Read Replica of an Amazon RDS encrypted instance is also encrypted using the same key as the master instance when both are in the same region.</p>
+<p>If the master and Read Replica are in different regions, you encrypt using the encryption key for that region.</p>
+<p>You can&rsquo;t have an encrypted Read Replica of an unencrypted DB instance or an unencrypted Read Replica of an encrypted DB instance.</p>
+<p>Encryption/decryption is handled transparently.</p>
+<p>RDS supports SSL encryption between applications and RDS DB instances.</p>
+<p>RDS generates a certificate for the instance.</p>
+<h4 id="db-subnet-groups">DB Subnet Groups</h4>
+<p>A <strong>DB subnet group</strong> is a collection of subnets (typically private) that you create in a VPC and that you then designate for your DB instances.</p>
+<p>Each DB subnet group should have subnets in at least two Availability Zones in a given region.</p>
+<p>It is recommended to configure a subnet group with subnets in each AZ (even for standalone instances).</p>
+<p>During the creation of an RDS instance, you can select the DB subnet group and the AZ within the group to place the RDS DB instance in.</p>
+<p>You cannot pick the IP within the subnet that is allocated.</p>
+<h4 id="billing-and-provisioning">Billing and Provisioning</h4>
+<p><strong>AWS Charge for:</strong></p>
+<ul>
+<li>DB instance hours (partial hours are charged as full hours).</li>
+<li>Storage GB/month.</li>
+<li>I/O requests/month – for magnetic storage.</li>
+<li>Provisioned IOPS/month – for RDS provisioned IOPS SSD.</li>
+<li>Egress data transfer.</li>
+<li>Backup storage (DB backups and manual snapshots).</li>
+<li>Backup storage for the automated RDS backup is free of charge up to the provisioned EBS volume size.</li>
+</ul>
+<p>However, AWS replicates data across multiple AZs, so you are charged for the extra storage space on S3.</p>
+<p>For multi-AZ, you are charged for:</p>
+<ul>
+<li>Multi-AZ DB hours.</li>
+<li>Provisioned storage.</li>
+<li>Double write I/Os.</li>
+</ul>
+<p>For multi-AZ, you are not charged for DB data transfer during replication from primary to standby.</p>
+<p>Oracle and Microsoft SQL licenses are included, or you can bring your own (BYO).</p>
+<p>On-demand and reserved instance pricing available.</p>
+<p>Reserved instances are defined based on the following attributes which must not be changed:</p>
+<ul>
+<li>DB engine.</li>
+<li>DB instance class.</li>
+<li>Deployment type (standalone, multi-AZ).</li>
+<li>License model.</li>
+<li>Region.</li>
+</ul>
+<p><strong>Reserved instances:</strong></p>
+<ul>
+<li>Can be moved between AZs in the same region.</li>
+<li>Are available for multi-AZ deployments.</li>
+<li>Can be applied to Read Replicas if DB instance class and region are the same.</li>
+</ul>
+<p>Scaling is achieved through changing the instance class for compute and modifying storage capacity for additional storage allocation.</p>
+<h4 id="scalability">Scalability</h4>
+<p>You can only scale RDS up (compute and storage).</p>
+<p>You cannot decrease the allocated storage for an RDS instance.</p>
+<p>You can scale storage and change the storage type for all DB engines except MS SQL.</p>
+<p>For MS SQL, the workaround is to create a new instance from a snapshot with the new configuration.</p>
+<p>Scaling storage can happen while the RDS instance is running without outage; however, there may be performance degradation.</p>
+<p>Scaling compute will cause downtime.</p>
+<p>You can choose to have changes take effect immediately, however, the default is within the maintenance window.</p>
+<p>Scaling requests are applied during the specified maintenance window unless “apply immediately” is used.</p>
+<p>All RDS DB types support a maximum DB size of 64 TiB except for Microsoft SQL Server (16 TiB).</p>
+<h4 id="performance">Performance</h4>
+<p>Amazon RDS uses EBS volumes (never uses instance store) for DB and log storage.</p>
+<p>There are three storage types available: <strong>General Purpose (SSD)</strong>, <strong>Provisioned IOPS (SSD)</strong>, and <strong>Magnetic</strong>.</p>
+<p><strong>General Purpose (SSD):</strong></p>
+<ul>
+<li>Use for Database workloads with moderate I/O requirement.</li>
+<li>Cost-effective.</li>
+<li>Also called gp2.</li>
+<li>3 IOPS/GB.</li>
+<li>Burst up to 3000 IOPS.</li>
+</ul>
+<p><strong>Provisioned IOPS (SSD):</strong></p>
+<ul>
+<li>Use for I/O intensive workloads.</li>
+<li>Low latency and consistent I/O.</li>
+<li>User-specified IOPS (see table below).</li>
+</ul>
+<p>For provisioned IOPS storage, the table below shows the range of Provisioned IOPS and storage size range for each database engine.</p>
+<table>
+<thead>
+<tr>
+<th>Database Engine</th>
+<th>Range of Provisioned IOPS</th>
+<th>Range of Storage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MariaDB</td>
+<td>1,000-80,000 IOPS</td>
+<td>100 GiB-64TiB</td>
+</tr>
+<tr>
+<td>SQL Server</td>
+<td>1,000-64,000 IOPS</td>
+<td>20 GiB-16TiB</td>
+</tr>
+<tr>
+<td>MySQL</td>
+<td>1,000-80,000 IOPS</td>
+<td>100 GiB-64TiB</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>1,000-256,000 IOPS</td>
+<td>100 GiB-64TiB</td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td>1,000-80,000 IOPS</td>
+<td>100 GiB-64TiB</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Magnetic:</strong></p>
+<ul>
+<li>Not recommended anymore, available for backward compatibility.</li>
+<li>Doesn’t allow you to scale storage when using the SQL Server database engine.</li>
+<li>Doesn’t support elastic volumes.</li>
+<li>Limited to a maximum size of 4 TiB.</li>
+<li>Limited to a maximum of 1,000 IOPS.</li>
+</ul>
+<h4 id="multi-az-and-read-replicas">Multi-AZ and Read Replicas</h4>
+<p>Multi-AZ and Read Replicas are used for high availability, fault tolerance, and performance scaling.</p>
+<p>The table below compares multi-AZ deployments to Read Replicas:</p>
+<table>
+<thead>
+<tr>
+<th>Multi-AZ Deployments</th>
+<th>Read Replicas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Synchronous Replication – highly durable</td>
+<td>Asynchronous replication – highly scalable</td>
+</tr>
+<tr>
+<td>Only database engine on primary instance is active</td>
+<td>All read replicas are accessible and can be used for read scaling</td>
+</tr>
+<tr>
+<td>Automated backups are taken from standby</td>
+<td>No backups configured by default</td>
+</tr>
+<tr>
+<td>Always span two availability zones within a single region</td>
+<td>Can be within an Availability Zone, Cross-AZ, or Cross-Region</td>
+</tr>
+<tr>
+<td>Database engine version upgrades happen on primary</td>
+<td>Database engine version upgrade is independent from the source instance</td>
+</tr>
+<tr>
+<td>Automatic failover to standby when a problem is detected</td>
+<td>Can be manually promoted to a standalone database instance</td>
+</tr>
+</tbody>
+</table>
+<h4 id="multi-az">Multi-AZ</h4>
+<p>Multi-AZ RDS creates a replica in another AZ and synchronously replicates to it (DR only).</p>
+<p>There is an option to choose multi-AZ during the launch wizard.</p>
+<p>AWS recommends the use of provisioned IOPS storage for multi-AZ RDS DB instances.</p>
+<p>Each AZ runs on its own physically distinct, independent infrastructure, and is engineered to be highly reliable.</p>
+<p>You cannot choose which AZ in the region will be chosen to create the standby DB instance.</p>
+<p>You can view which AZ the standby DB instance is created in.</p>
+<p>A failover may be triggered in the following circumstances:</p>
+<ul>
+<li>Loss of primary AZ or primary DB instance failure.</li>
+<li>Loss of network connectivity on primary.</li>
+<li>Compute (EC2) unit failure on primary.</li>
+<li>Storage (EBS) unit failure on primary.</li>
+<li>The primary DB instance is changed.</li>
+<li>Patching of the OS on the primary DB instance.</li>
+<li>Manual failover (reboot with failover selected on primary).</li>
+</ul>
+<p>During failover, RDS automatically updates configuration (including DNS endpoint) to use the second node.</p>
+<p>Depending on the instance class, it can take 1 to a few minutes to failover to a standby DB instance.</p>
+<p>It is recommended to implement DB connection retries in your application.</p>
+<p>Recommended to use the endpoint rather than the IP address to point applications to the RDS DB.</p>
+<p>The method to initiate a manual RDS DB instance failover is to reboot selecting the option to failover.</p>
+<p>A DB instance reboot is required for changes to take effect when you change the DB parameter group or when you change a static DB parameter.</p>
+<p>The DB parameter group is a configuration container for the DB engine configuration.</p>
+<p>You will be alerted by a DB instance event when a failover occurs.</p>
+<p>The secondary DB in a multi-AZ configuration cannot be used as an independent read node (read or write).</p>
+<p>There is no charge for data transfer between primary and secondary RDS instances.</p>
+<p>System upgrades like OS patching, DB Instance scaling, and system upgrades are applied first on the standby before failing over and modifying the other DB Instance.</p>
+<p>In multi-AZ configurations, snapshots and automated backups are performed on the standby to avoid I/O suspension on the primary instance.</p>
+<h4 id="read-replica-support-for-multi-az">Read Replica Support for Multi-AZ:</h4>
+<p>Amazon RDS Read Replicas for MySQL, MariaDB, PostgreSQL, and Oracle support Multi-AZ deployments.</p>
+<p>Combining Read Replicas with Multi-AZ enables you to build a resilient disaster recovery strategy and simplify your database engine upgrade process.</p>
+<p>A Read Replica in a different region than the source database can be used as a standby database and promoted to become the new production database in case of a regional disruption.</p>
+<p>This allows you to scale reads whilst also having multi-AZ for DR.</p>
+<p>The process for implementing maintenance activities is as follows:</p>
+<ol>
+<li>Perform operations on standby.</li>
+<li>Promote standby to primary.</li>
+<li>Perform operations on new standby (demoted primary).</li>
+</ol>
+<p>You can manually upgrade a DB instance to a supported DB engine version from the AWS Console.</p>
+<p>By default, upgrades will take effect during the next maintenance window.</p>
+<p>You can optionally force an immediate upgrade.</p>
+<p>In multi-AZ deployments, version upgrades will be conducted on both the primary and standby at the same time, causing an outage of both DB instances.</p>
+<p>Ensure security groups and NACLs will allow your application servers to communicate with both the primary and standby instances.</p>
+<h4 id="read-replicas">Read Replicas</h4>
+<ul>
+<li>
+<p>Read replicas are used for read-heavy DBs, and replication is asynchronous.</p>
+</li>
+<li>
+<p>Read replicas are for workload sharing and offloading.</p>
+</li>
+<li>
+<p>Read replicas provide read-only DR.</p>
+</li>
+<li>
+<p>Read replicas are created from a snapshot of the master instance.</p>
+</li>
+<li>
+<p>Must have automated backups enabled on the primary (retention period &gt; 0).</p>
+</li>
+<li>
+<p>Only supported for transactional database storage engines (InnoDB not InnoDB).</p>
+</li>
+<li>
+<p>Read replicas are available for MySQL, PostgreSQL, MariaDB, Oracle, Aurora, and SQL Server.</p>
+</li>
+<li>
+<p>For the MySQL, MariaDB, PostgreSQL, and Oracle database engines, Amazon RDS creates a second DB instance using a snapshot of the source DB instance. It then uses the engines’ native asynchronous replication to update the read replica whenever there is a change to the source DB instance.</p>
+</li>
+<li>
+<p>Amazon Aurora employs an SSD-backed virtualized storage layer purpose-built for database workloads.</p>
+</li>
+<li>
+<p>You can take snapshots of PostgreSQL read replicas but cannot enable automated backups.</p>
+</li>
+<li>
+<p>You can enable automatic backups on MySQL and MariaDB read replicas.</p>
+</li>
+<li>
+<p>You can enable writes to the MySQL and MariaDB Read Replicas.</p>
+</li>
+<li>
+<p>You can have 5 read replicas of a production DB.</p>
+</li>
+<li>
+<p>You cannot have more than four instances involved in a replication chain.</p>
+</li>
+<li>
+<p>You can have read replicas of read replicas for MySQL and MariaDB but not for PostgreSQL.</p>
+</li>
+<li>
+<p>Read replicas can be configured from the AWS Console or the API.</p>
+</li>
+<li>
+<p>You can specify the AZ the read replica is deployed in.</p>
+</li>
+<li>
+<p>The read replica&rsquo;s storage type and instance class can be different from the source but the compute should be at least the performance of the source.</p>
+</li>
+<li>
+<p>You cannot change the DB engine.</p>
+</li>
+<li>
+<p>In a multi-AZ failover, the read replicas are switched to the new primary.</p>
+</li>
+<li>
+<p>Read replicas must be explicitly deleted.</p>
+</li>
+<li>
+<p>If a source DB instance is deleted without deleting the replicas, each replica becomes a standalone single-AZ DB instance.</p>
+</li>
+<li>
+<p>You can promote a read replica to primary.</p>
+</li>
+<li>
+<p>Promotion of read replicas takes several minutes.</p>
+</li>
+<li>
+<p>Promoted read replicas retain:</p>
+<ul>
+<li>Backup retention window.</li>
+<li>Backup window.</li>
+<li>DB parameter group.</li>
+</ul>
+</li>
+<li>
+<p>Existing read replicas continue to function as normal.</p>
+</li>
+<li>
+<p>Each read replica has its own DNS endpoint.</p>
+</li>
+<li>
+<p>Read replicas can have multi-AZ enabled, and you can create read replicas of multi-AZ source DBs.</p>
+</li>
+<li>
+<p>Read replicas can be in another region (uses asynchronous replication).</p>
+</li>
+<li>
+<p>This configuration can be used for centralizing data from across different regions for analytics.</p>
+</li>
+</ul>
+<h4 id="db-snapshots">DB Snapshots</h4>
+<p>DB Snapshots are user-initiated and enable you to back up your DB instance in a known state as frequently as you wish, and then restore to that specific state.</p>
+<ul>
+<li>Cannot be used for point-in-time recovery.</li>
+<li>Snapshots are stored on S3.</li>
+<li>Snapshots remain on S3 until manually deleted.</li>
+<li>Backups are taken within a defined window.</li>
+<li>I/O is briefly suspended while backups initialize and may increase latency (applicable to single-AZ RDS).</li>
+<li>DB snapshots that are performed manually will be stored even after the RDS instance is deleted.</li>
+<li>Restored DBs will always be a new RDS instance with a new DNS endpoint.</li>
+<li>Can restore up to the last 5 minutes.</li>
+<li>Only default DB parameters and security groups are restored – you must manually associate all other DB parameters and SGs.</li>
+<li>It is recommended to take a final snapshot before deleting an RDS instance.</li>
+<li>Snapshots can be shared with other AWS accounts.</li>
+</ul>
+<h4 id="high-availability-approaches-for-databases">High Availability Approaches for Databases</h4>
+<p>If possible, choose DynamoDB over RDS because of inherent fault tolerance.</p>
+<p>If DynamoDB can’t be used, choose Aurora because of redundancy and automatic recovery features.</p>
+<p>If Aurora can’t be used, choose Multi-AZ RDS.</p>
+<p>Frequent RDS snapshots can protect against data corruption or failure, and they won’t impact the performance of Multi-AZ deployment.</p>
+<p>Regional replication is also an option but will not be strongly consistent.</p>
+<p>If the database runs on EC2, you must design the HA yourself.</p>
+<h4 id="migration">Migration</h4>
+<p>AWS Database Migration Service helps you migrate databases to AWS quickly and securely.</p>
+<p>Use along with the Schema Conversion Tool (SCT) to migrate databases to AWS RDS or EC2-based databases.</p>
+<p>The source database remains fully operational during the migration, minimizing downtime to applications that rely on the database.</p>
+<p>The AWS Database Migration Service can migrate your data to and from most widely used commercial and open-source databases.</p>
+<p>Schema Conversion Tool can copy database schemas for homogenous migrations (same database) and convert schemas for heterogeneous migrations (different database).</p>
+<p>DMS is used for smaller, simpler conversions and supports MongoDB and DynamoDB.</p>
+<p>SCT is used for larger, more complex datasets like data warehouses.</p>
+<p>DMS has replication functions for on-premises to AWS or to Snowball or S3.</p>
+<h4 id="monitoring-logging-and-reporting">Monitoring, Logging, and Reporting</h4>
+<p>You can use the following automated monitoring tools to watch Amazon RDS and report when something is wrong:</p>
+<ul>
+<li>Amazon RDS Events – Subscribe to Amazon RDS events to be notified when changes occur with a DB instance, DB snapshot, DB parameter group, or DB security group.</li>
+<li>Database log files – View, download, or watch database log files using the Amazon RDS console or Amazon RDS API operations. You can also query some database log files that are loaded into database tables.</li>
+<li>Amazon RDS Enhanced Monitoring — Look at metrics in real time for the operating system.</li>
+<li>Amazon RDS Performance Insights — Assess the load on your database and determine when and where to act.</li>
+<li>Amazon RDS Recommendations — Look at automated recommendations for database resources, such as DB instances, read replicas, and DB parameter groups.</li>
+</ul>
+<p>In addition, Amazon RDS integrates with Amazon CloudWatch, Amazon EventBridge, and AWS CloudTrail for additional monitoring capabilities:</p>
+<ul>
+<li>Amazon CloudWatch Metrics – Amazon RDS automatically sends metrics to CloudWatch every minute for each active database. You don’t get additional charges for Amazon RDS metrics in CloudWatch.</li>
+<li>Amazon CloudWatch Alarms – You can watch a single Amazon RDS metric over a specific time period. You can then perform one or more actions based on the value of the metric relative to a threshold that you set.</li>
+<li>Amazon CloudWatch Logs – Most DB engines enable you to monitor, store, and access your database log files in CloudWatch Logs.</li>
+<li>Amazon CloudWatch Events and Amazon EventBridge – You can automate AWS services and respond to system events such as application availability issues or resource changes. Events from AWS services are delivered to CloudWatch Events and EventBridge nearly in real time. You can write simple rules to indicate which events interest you and what automated actions to take when an event matches a rule.</li>
+<li>AWS CloudTrail – You can view a record of actions taken by a user, role, or an AWS service in Amazon RDS. CloudTrail captures all API calls for Amazon RDS as events. These captures include calls from the Amazon RDS console and from code calls to the Amazon RDS API operations. If you create a trail, you can enable continuous delivery of CloudTrail events to an Amazon S3 bucket, including events for Amazon RDS. If you don’t configure a trail, you can still view the most recent events in the CloudTrail console in Event history.</li>
+</ul>
+	
+  
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+		
+			<a class="nav nav-next" href="/1-introduce/" title="Introduction" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1704857834"></script>
+    <script src="/js/perfect-scrollbar.min.js?1704857834"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1704857834"></script>
+    <script src="/js/jquery.sticky.js?1704857834"></script>
+    <script src="/js/featherlight.min.js?1704857834"></script>
+    <script src="/js/highlight.pack.js?1704857834"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1704857834"></script>
+    <script src="/js/learn.js?1704857834"></script>
+    <script src="/js/hugo-learn.js?1704857834"></script>
+
+    <link href="/mermaid/mermaid.css?1704857834" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1704857834"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158079754-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
+
